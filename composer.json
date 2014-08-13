@@ -1,5 +1,5 @@
 {
-    "name": "quickapps-theme/space-oddity",
+    "name": "quickapps-plugins/space-oddity",
     "description": "Dummy plugin for testing QuickApps CMS. Replaces page's title with some random lyrics.",
     "type": "quickapps-plugin",
     "keywords": [
