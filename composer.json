@@ -7,11 +7,12 @@
         "cms",
         "cmf",
         "quickapps",
-        "theme",
-        "backend",
-        "responsive layout",
-        "full width template",
-        "rtl language"
+        "plugin",
+        "dummy",
+        "test",
+        "lyrics",
+        "space oddity",
+        "music"
     ],
     "homepage": "http://quickappscms.org",
     "license": "GPL-3.0",
