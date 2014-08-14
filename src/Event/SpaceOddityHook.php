@@ -13,6 +13,7 @@ namespace Hook;
 
 use Cake\Event\Event;
 use Cake\Event\EventListener;
+use Cake\Utility\Debugger;
 
 /**
  * SpaceOddity Hook class.
@@ -64,6 +65,12 @@ And there\'s nothing I can do.';
 		return [
 			'Plugin.SpaceOddity.beforeInstall' => 'beforeInstall',
 			'Plugin.SpaceOddity.afterInstall' => 'afterInstall',
+			'Plugin.SpaceOddity.beforeUpdate' => 'beforeUpdate',
+			'Plugin.SpaceOddity.afterUpdate' => 'afterUpdate',
+			'Plugin.SpaceOddity.beforeEnable' => 'beforeEnable',
+			'Plugin.SpaceOddity.afterEnable' => 'afterEnable',
+			'Plugin.SpaceOddity.beforeDisable' => 'beforeDisable',
+			'Plugin.SpaceOddity.afterDisable' => 'afterDisable',
 			'Plugin.SpaceOddity.beforeUninstall' => 'beforeUninstall',
 			'Plugin.SpaceOddity.afterUninstall' => 'afterUninstall',
 			'View.afterRender' => 'afterRender',
@@ -77,47 +84,124 @@ And there\'s nothing I can do.';
  * @return void
  */
 	public function afterRender(Event $event) {
-		$lines = explode("\n", $this->_lyrics);
-		$message = trim($lines[ mt_rand(0, count($lines) - 1)]);
-		$event->subject->Blocks->set('title', $message);
+		$event->subject->Blocks->set('title', $this->_line());
 	}
 
 /**
- * Triggered before plugin is registered on DB.
+ * Triggered before plugin is registered on DB and before plugin's directory
+ * is moved to its final destination.
  * 
  * @param \Cake\Event\Event $event
- * @return bool Returning FALSE or stopping the event will halt the install operation
+ * @return bool Returning false or stopping the event will halt the install operation
  */
 	public function beforeInstall(Event $event) {
+		Debugger::log('beforeInstall: ' . $this->_line());
 		return true;
 	}
 
 /**
- * Triggered after plugin is registered on DB.
+ * Triggered after plugin is registered on DB and after plugin's directory
+ * moved to its final destination.
  * 
  * @param \Cake\Event\Event $event
  * @return void
  */
 	public function afterInstall(Event $event) {
+		Debugger::log('afterInstall: ' . $this->_line());
 	}
 
 /**
- * Triggered before plugin is removed from DB, and before its directory is removed.
+ * Triggered before plugin's new directory is moved to its final destination.
  * 
  * @param \Cake\Event\Event $event
- * @return bool Returning FALSE or stopping the event will halt the uninstall operation
+ * @return bool Returning false or stopping the event will halt the update operation
  */
-	public function beforeUninstall(Event $event) {
+	public function beforeUpdate(Event $event) {
+		Debugger::log('beforeUpdate: ' . $this->_line());
 		return true;
 	}
 
 /**
- * Triggered after plugin is removed from DB, and after its directory was removed.
+ * Triggered after plugin's new directory is moved to its final destination.
+ * 
+ * @param \Cake\Event\Event $event
+ * @return void
+ */
+	public function aftereUpdate(Event $event) {
+		Debugger::log('aftereUpdate: ' . $this->_line());
+	}
+
+/**
+ * Triggered before plugin is enabled.
+ * 
+ * @param \Cake\Event\Event $event
+ * @return bool Returning false or stopping the event will halt the enabling operation
+ */
+	public function beforeEnable(Event $event) {
+		Debugger::log('beforeEnable: ' . $this->_line());
+		return true;
+	}
+
+/**
+ * Triggered after plugin was enabled.
+ * 
+ * @param \Cake\Event\Event $event
+ * @return void
+ */
+	public function aftereEnable(Event $event) {
+		Debugger::log('aftereEnable: ' . $this->_line());
+	}
+
+/**
+ * Triggered before plugin is disabled.
+ * 
+ * @param \Cake\Event\Event $event
+ * @return bool Returning false or stopping the event will halt the disabling operation
+ */
+	public function beforeDisable(Event $event) {
+		Debugger::log('beforeDisable: ' . $this->_line());
+		return true;
+	}
+
+/**
+ * Triggered after plugin was disabled.
+ * 
+ * @param \Cake\Event\Event $event
+ * @return void
+ */
+	public function aftereDisable(Event $event) {
+		Debugger::log('aftereDisable: ' . $this->_line());
+	}
+
+/**
+ * Triggered before plugin is removed from DB and before its directory is removed.
+ * 
+ * @param \Cake\Event\Event $event
+ * @return bool Returning false or stopping the event will halt the uninstall operation
+ */
+	public function beforeUninstall(Event $event) {
+		Debugger::log('beforeUninstall: ' . $this->_line());
+		return true;
+	}
+
+/**
+ * Triggered after plugin is removed from DB and after its directory was removed.
  * 
  * @param \Cake\Event\Event $event
  * @return void
  */
 	public function afterUninstall(Event $event) {
+		Debugger::log('afterUninstall: ' . $this->_line());
+	}
+
+/**
+ * Returns a random lyric line.
+ * 
+ * @return string
+ */
+	protected function _line() {
+		$lines = explode("\n", $this->_lyrics);
+		return '♪ ♫ ♭♯ ~ ' . trim($lines[array_rand($lines)]) . ' ~ ♪ ♫ ♭♯';
 	}
 
 }
