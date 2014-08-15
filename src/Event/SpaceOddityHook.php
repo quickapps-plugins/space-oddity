@@ -127,8 +127,8 @@ And there\'s nothing I can do.';
  * @param \Cake\Event\Event $event
  * @return void
  */
-	public function aftereUpdate(Event $event) {
-		Debugger::log('aftereUpdate: ' . $this->_line());
+	public function afterUpdate(Event $event) {
+		Debugger::log('afterUpdate: ' . $this->_line());
 	}
 
 /**
@@ -148,8 +148,8 @@ And there\'s nothing I can do.';
  * @param \Cake\Event\Event $event
  * @return void
  */
-	public function aftereEnable(Event $event) {
-		Debugger::log('aftereEnable: ' . $this->_line());
+	public function afterEnable(Event $event) {
+		Debugger::log('afterEnable: ' . $this->_line());
 	}
 
 /**
@@ -169,8 +169,8 @@ And there\'s nothing I can do.';
  * @param \Cake\Event\Event $event
  * @return void
  */
-	public function aftereDisable(Event $event) {
-		Debugger::log('aftereDisable: ' . $this->_line());
+	public function afterDisable(Event $event) {
+		Debugger::log('afterDisable: ' . $this->_line());
 	}
 
 /**
